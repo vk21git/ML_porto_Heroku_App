@@ -74,19 +74,19 @@ def predict():
         return train, test
 
     train_df = pd.read_csv('train.csv')
-    test_df = pd.read_csv('test.csv')
+    #test_df = pd.read_csv('test.csv')
 
     #############################################################################################
 
     # Dropping id from test data and dropping id and target from train data
 
-    test_id = test_df['id']
-    test_df.drop('id', axis=1, inplace=True)
+    #test_id = test_df['id']
+    #test_df.drop('id', axis=1, inplace=True)
     y = train_df['target']
     train = train_df.drop(['id', 'target'], axis=1)
 
     train_without_missing_values = train
-    test_without_missing_values = test_df
+    #test_without_missing_values = test_df
 
     # Categorial features
     cat_features = []
@@ -106,7 +106,7 @@ def predict():
 
     # Dropping All calc features as they are just random noise
     train_without_missing_values.drop(calc_features, axis=1, inplace=True)
-    test_without_missing_values.drop(calc_features, axis=1, inplace=True)
+    #test_without_missing_values.drop(calc_features, axis=1, inplace=True)
 
     #############################################################################################
     # splitting the train dataset for cross validation and one_hot_encoding categorical features
@@ -129,6 +129,7 @@ def predict():
 
     #print("Number of df_test", df_test.columns)
 
+    print("train_without_missing_values : ", train_without_missing_values)
     # For Actual submission
     train_ohe_1, test_ohe_1 = one_hot_encoding(train_without_missing_values, df_test, cat_features)
 
